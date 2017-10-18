@@ -1,0 +1,42 @@
+﻿@model ConcertTicketsWeb.Models.Seat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Seat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Row)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Row)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Column)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Column)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

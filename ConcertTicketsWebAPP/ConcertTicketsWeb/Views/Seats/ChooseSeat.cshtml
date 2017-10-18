@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ConcertTicketsWeb.Models.Seat>
+
+@{
+    ViewBag.Title = "Choose Seat";
+}
+
+<h2>Choose Seat</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Row)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Column)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Row)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Column)
+        </td>
+        <td>
+            @Html.ActionLink("Reserve", "Reserve", "Reservations", new { seat_id=item.ID, concert_id=ViewBag.ConcertID }, null)
+        </td>
+    </tr>
+}
+
+</table>
