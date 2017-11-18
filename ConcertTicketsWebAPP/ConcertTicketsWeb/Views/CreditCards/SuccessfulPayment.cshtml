@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Reserve";
+}
+
+<h2>Your payment was successful!</h2>
+
+<table class="table">
+    <tr>
+        <td>Reservation ID:</td>
+        <td><strong>@ViewBag.creditCard.Reservation.ID</strong></td>
+    </tr>
+    <tr>
+        <td>Concert:</td>
+        <td><strong>@ViewBag.creditCard.Reservation.Concert.Name</strong></td>
+    </tr>
+    <tr>
+        <td>Date and Time:</td>
+        <td><strong>@ViewBag.creditCard.Reservation.Concert.Date</strong></td>
+    </tr>
+    <tr>
+        <td>Column:</td>
+        <td><strong>@ViewBag.creditCard.Reservation.Seat.Column</strong></td>
+    </tr>
+    <tr>
+        <td>Row:</td>
+        <td><strong>@ViewBag.creditCard.Reservation.Seat.Row</strong></td>
+    </tr>
+    <tr>
+        <td>Paid:</td>
+        <td style="font-size: 16px; color: gray;"><strong>$@ViewBag.creditCard.Reservation.Seat.Price</strong></td>
+    </tr>
+</table>
+
+@if (!ViewBag.is_authenticated) {
+    <p style="font-size: 16px;">
+        @Html.ActionLink("Create an account", "Register", "Account", new { creditcard_id = ViewBag.creditCard.ID }, new { @class = "btn btn-default btn-lg", @role = "button", @style="margin-bottom:5px;" }) if you want to access reservation details later!
+    </p>
+}

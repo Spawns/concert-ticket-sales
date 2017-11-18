@@ -18,6 +18,8 @@ namespace ConcertTicketsWeb.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public AccountController()
         {
         }
@@ -137,9 +139,75 @@ namespace ConcertTicketsWeb.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(int? creditcard_id)
         {
+            if (creditcard_id != null)
+            {
+                CreditCard creditCard = db.CreditCards.Find(creditcard_id);
+
+                if (creditCard == null)
+                {
+                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                }
+
+                if (creditCard.UserID != null)
+                {
+                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                }
+
+                ViewBag.creditCard = creditCard;
+            }
+            
             return View();
+        }
+
+        public ActionResult AddReservation(int? creditcard_id)
+        {
+            if (creditcard_id > 0 && User.Identity.IsAuthenticated)
+            {
+                CreditCard creditCard = db.CreditCards.Find(creditcard_id);
+
+                if (creditCard == null)
+                {
+                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                }
+
+                if (creditCard.UserID != null)
+                {
+                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                }
+
+                ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+
+                creditCard.User = user;
+                creditCard.UserID = user.Id;
+                creditCard.Reservation.User = user;
+                creditCard.Reservation.UserID = user.Id;
+
+                try
+                {
+                    db.SaveChanges();
+
+                    return View();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    Exception raise = dbEx;
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            string message = string.Format("{0}:{1}",
+                                validationErrors.Entry.Entity.ToString(),
+                                validationError.ErrorMessage);
+                            raise = new InvalidOperationException(message, raise);
+                        }
+                    }
+                    throw raise;
+                }
+            }
+
+            return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
         }
 
         //
@@ -152,18 +220,19 @@ namespace ConcertTicketsWeb.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AddReservation", new { creditcard_id = model.creditcard_id });
                 }
                 AddErrors(result);
             }

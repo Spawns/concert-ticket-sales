@@ -79,6 +79,8 @@ namespace ConcertTicketsWeb.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public int creditcard_id { get; set; }
     }
 
     public class ResetPasswordViewModel

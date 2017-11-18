@@ -35,5 +35,7 @@ namespace ConcertTicketsWeb.Models
         public System.Data.Entity.DbSet<ConcertTicketsWeb.Models.Reservation> Reservations { get; set; }
 
         public System.Data.Entity.DbSet<ConcertTicketsWeb.Models.Seat> Seats { get; set; }
+
+        public System.Data.Entity.DbSet<ConcertTicketsWeb.Models.CreditCard> CreditCards { get; set; }
     }
 }

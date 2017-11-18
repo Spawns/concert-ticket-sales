@@ -197,6 +197,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConcertsController.cs" />
+    <Compile Include="Controllers\CreditCardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
@@ -212,9 +213,30 @@
     <Compile Include="Migrations\201710181043269_ColumnRow.Designer.cs">
       <DependentUpon>201710181043269_ColumnRow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711081052176_add status field to reservations.cs" />
+    <Compile Include="Migrations\201711081052176_add status field to reservations.Designer.cs">
+      <DependentUpon>201711081052176_add status field to reservations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711081517202_create CreditCard model.cs" />
+    <Compile Include="Migrations\201711081517202_create CreditCard model.Designer.cs">
+      <DependentUpon>201711081517202_create CreditCard model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711081531153_added CreditCard model.cs" />
+    <Compile Include="Migrations\201711081531153_added CreditCard model.Designer.cs">
+      <DependentUpon>201711081531153_added CreditCard model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711142133317_Add user references.cs" />
+    <Compile Include="Migrations\201711142133317_Add user references.Designer.cs">
+      <DependentUpon>201711142133317_Add user references.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711142144405_update user id type.cs" />
+    <Compile Include="Migrations\201711142144405_update user id type.Designer.cs">
+      <DependentUpon>201711142144405_update user id type.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Concert.cs" />
+    <Compile Include="Models\CreditCard.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Reservation.cs" />
@@ -299,6 +321,16 @@
     <Content Include="Views\Seats\Index.cshtml" />
     <Content Include="Views\Seats\ChooseSeat.cshtml" />
     <Content Include="Views\Reservations\Reserve.cshtml" />
+    <Content Include="Views\CreditCards\Create.cshtml" />
+    <Content Include="Views\CreditCards\Delete.cshtml" />
+    <Content Include="Views\CreditCards\Details.cshtml" />
+    <Content Include="Views\CreditCards\Edit.cshtml" />
+    <Content Include="Views\CreditCards\Index.cshtml" />
+    <Content Include="Views\CreditCards\Pay.cshtml" />
+    <Content Include="Views\CreditCards\SuccessfulPayment.cshtml" />
+    <Content Include="Views\Reservations\MyReservations.cshtml" />
+    <Content Include="Views\Account\AddReservation.cshtml" />
+    <Content Include="Views\Reservations\Cancel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -317,6 +349,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710181043269_ColumnRow.resx">
       <DependentUpon>201710181043269_ColumnRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711081052176_add status field to reservations.resx">
+      <DependentUpon>201711081052176_add status field to reservations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711081517202_create CreditCard model.resx">
+      <DependentUpon>201711081517202_create CreditCard model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711081531153_added CreditCard model.resx">
+      <DependentUpon>201711081531153_added CreditCard model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711142133317_Add user references.resx">
+      <DependentUpon>201711142133317_Add user references.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711142144405_update user id type.resx">
+      <DependentUpon>201711142144405_update user id type.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

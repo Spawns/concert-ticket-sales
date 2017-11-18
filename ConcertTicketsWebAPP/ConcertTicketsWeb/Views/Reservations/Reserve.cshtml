@@ -5,3 +5,33 @@
 
 <h2>Your reservation was created successfully!</h2>
 
+<table class="table">
+    <tr>
+        <td>Reservation ID:</td>
+        <td><strong>@ViewBag.reservation.ID</strong></td>
+    </tr>
+    <tr>
+        <td>Concert:</td>
+        <td><strong>@ViewBag.reservation.Concert.Name</strong></td>
+    </tr>
+    <tr>
+        <td>Date and Time:</td>
+        <td><strong>@ViewBag.reservation.Concert.Date</strong></td>
+    </tr>
+    <tr>
+        <td>Column:</td>
+        <td><strong>@ViewBag.reservation.Seat.Column</strong></td>
+    </tr>
+    <tr>
+        <td>Row:</td>
+        <td><strong>@ViewBag.reservation.Seat.Row</strong></td>
+    </tr>
+    <tr>
+        <td>Price to pay:</td>
+        <td style="font-size: 16px"><strong>$@ViewBag.reservation.Seat.Price</strong></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>@Html.ActionLink("Pay!", "Pay", "CreditCards", new { reservation_id = ViewBag.reservation.ID }, new { @class = "btn btn-success btn-lg", @role = "button" })</td>
+    </tr>
+</table>

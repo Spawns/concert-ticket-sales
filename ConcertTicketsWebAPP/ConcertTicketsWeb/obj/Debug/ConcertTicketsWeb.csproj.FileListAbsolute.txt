@@ -169,3 +169,8 @@ C:\Users\Ariel Lubonja\Documents\Projects\ASP.NET\ConcertTicketsWeb\ConcertTicke
 C:\Users\Ariel Lubonja\Documents\Projects\ASP.NET\ConcertTicketsWeb\ConcertTicketsWebAPP\ConcertTicketsWeb\obj\Debug\ConcertTicketsWeb.csproj.CoreCompileInputs.cache
 C:\Users\Ariel Lubonja\Documents\Projects\ASP.NET\ConcertTicketsWeb\ConcertTicketsWebAPP\ConcertTicketsWeb\obj\Debug\ConcertTicketsWeb.dll
 C:\Users\Ariel Lubonja\Documents\Projects\ASP.NET\ConcertTicketsWeb\ConcertTicketsWebAPP\ConcertTicketsWeb\obj\Debug\ConcertTicketsWeb.pdb
+C:\Users\evb140\Documents\Visual Studio 2015\Projects\ConcertTicketsWeb\ConcertTicketsWeb\obj\Debug\ConcertTicketsWeb.Migrations.addstatusfieldtoreservations.resources
+C:\Users\evb140\Documents\Visual Studio 2015\Projects\ConcertTicketsWeb\ConcertTicketsWeb\obj\Debug\ConcertTicketsWeb.Migrations.createCreditCardmodel.resources
+C:\Users\evb140\Documents\Visual Studio 2015\Projects\ConcertTicketsWeb\ConcertTicketsWeb\obj\Debug\ConcertTicketsWeb.Migrations.addedCreditCardmodel.resources
+C:\Users\evb140\Documents\Visual Studio 2015\Projects\ConcertTicketsWeb\ConcertTicketsWeb\obj\Debug\ConcertTicketsWeb.Migrations.Adduserreferences.resources
+C:\Users\evb140\Documents\Visual Studio 2015\Projects\ConcertTicketsWeb\ConcertTicketsWeb\obj\Debug\ConcertTicketsWeb.Migrations.updateuseridtype.resources

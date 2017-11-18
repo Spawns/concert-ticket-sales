@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ConcertTicketsWeb.Models;
+using Microsoft.AspNet.Identity;
 
 namespace ConcertTicketsWeb.Controllers
 {
@@ -28,6 +29,11 @@ namespace ConcertTicketsWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            if (db.Reservations.Count(r => r.SeatID == seat_id && r.ConcertID == concert_id) > 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             Seat seat = db.Seats.Find(seat_id);
             Concert concert = db.Concerts.Find(concert_id);
 
@@ -36,12 +42,35 @@ namespace ConcertTicketsWeb.Controllers
                 return HttpNotFound();
             }
 
-            Reservation reservation = new Reservation { Seat = seat, Concert = concert };
+            Reservation reservation = new Reservation { Seat = seat, Concert = concert, status = "CREATED" };
+
+            if (User.Identity.IsAuthenticated)
+            {
+                reservation.User = db.Users.Find(User.Identity.GetUserId());
+                reservation.UserID = User.Identity.GetUserId();
+            }
 
             db.Reservations.Add(reservation);
             db.SaveChanges();
 
+            ViewBag.reservation = reservation;
+
             return View();
+        }
+
+        public ActionResult MyReservations()
+        {
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            string UserId = User.Identity.GetUserId();
+
+            var Reservations = db.Reservations.Where(r => r.UserID == UserId).Include(r => r.Concert).Include(r => r.Seat);
+            
+            return View(Reservations.ToList());
         }
         
         // GET: Reservations/Details/5
@@ -119,6 +148,32 @@ namespace ConcertTicketsWeb.Controllers
             ViewBag.ConcertID = new SelectList(db.Concerts, "ID", "Name", reservation.ConcertID);
             ViewBag.SeatID = new SelectList(db.Seats, "ID", "ID", reservation.SeatID);
             return View(reservation);
+        }
+
+        // GET: Reservations/Delete/5
+        public ActionResult Cancel(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Reservation reservation = db.Reservations.Find(id);
+            if (reservation == null)
+            {
+                return HttpNotFound();
+            }
+            return View(reservation);
+        }
+
+        // POST: Reservations/Delete/5
+        [HttpPost, ActionName("Cancel")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CancelConfirmed(int id)
+        {
+            Reservation reservation = db.Reservations.Find(id);
+            db.Reservations.Remove(reservation);
+            db.SaveChanges();
+            return RedirectToAction("MyReservations");
         }
 
         // GET: Reservations/Delete/5
